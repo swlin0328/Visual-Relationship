@@ -1,0 +1,10 @@
+0: is
+1: at
+2: on
+3: holds
+4: inside_of
+5: plays
+6: interacts_with
+7: hits
+8: wears
+9: under

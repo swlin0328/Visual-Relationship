@@ -1,0 +1,22 @@
+# 檔案名稱 .gitignore
+
+
+# 忽略所有附檔名是 .tmp 的檔案
+*.tmp
+*.csv
+*.json
+*.pkl
+*.pyc
+*.html
+*.rst
+*.h5
+*.npy
+*.css
+*.js
+*.ipynb
+*.svg
+*.tfrecords
+*.jpg
+*ckpt*
+events.out.*
+*.zip

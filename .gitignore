@@ -13,7 +13,6 @@
 *.npy
 *.css
 *.js
-*.ipynb
 *.svg
 *.tfrecords
 *.jpg

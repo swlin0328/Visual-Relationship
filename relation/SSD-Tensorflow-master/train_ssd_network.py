@@ -22,7 +22,7 @@ from nets import nets_factory
 from preprocessing import preprocessing_factory
 import tf_utils
 import os
-#os.environ['CUDA_VISIBLE_DEVICES']='0'
+os.environ['CUDA_VISIBLE_DEVICES']='0'
 
 slim = tf.contrib.slim
 

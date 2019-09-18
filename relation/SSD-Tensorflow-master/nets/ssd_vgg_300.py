@@ -572,6 +572,14 @@ def ssd_arg_scope_caffe(caffe_scope):
                     return sc
 
 
+def focal_loss(labels,logits,gamma=2):
+    y_pred=tf.nn.softmax(logits, dim=-1) # [batch_size,num_classes]
+    labels=tf.one_hot(labels, depth=y_pred.shape[1])
+    L=-labels*((1-y_pred)**gamma)*0.1*tf.log(y_pred)
+    L=tf.reduce_sum(L,axis=1)
+    return L
+
+
 # =========================================================================== #
 # SSD loss function.
 # =========================================================================== #
@@ -636,14 +644,14 @@ def ssd_losses(logits, localisations,
 
         # Add cross-entropy loss.
         with tf.name_scope('cross_entropy_pos'):
-            loss = tf.nn.sparse_softmax_cross_entropy_with_logits(logits=logits,
-                                                                  labels=gclasses)
+            loss = focal_loss(logits=logits, labels=gclasses, gamma=0.5)
+            #loss = tf.nn.sparse_softmax_cross_entropy_with_logits(logits=logits, labels=gclasses)
             loss = tf.div(tf.reduce_sum(loss * fpmask), batch_size, name='value')
             tf.losses.add_loss(loss)
 
         with tf.name_scope('cross_entropy_neg'):
-            loss = tf.nn.sparse_softmax_cross_entropy_with_logits(logits=logits,
-                                                                  labels=no_classes)
+            loss = focal_loss(logits=logits, labels=no_classes, gamma=0.5)
+            #loss = tf.nn.sparse_softmax_cross_entropy_with_logits(logits=logits, labels=no_classes)
             loss = tf.div(tf.reduce_sum(loss * fnmask), batch_size, name='value')
             tf.losses.add_loss(loss)
 

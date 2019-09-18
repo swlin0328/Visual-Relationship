@@ -22,7 +22,7 @@ from nets import nets_factory
 from preprocessing import preprocessing_factory
 import tf_utils
 import os
-os.environ['CUDA_VISIBLE_DEVICES']='0'
+#os.environ['CUDA_VISIBLE_DEVICES']='0'
 
 slim = tf.contrib.slim
 
@@ -65,7 +65,7 @@ tf.app.flags.DEFINE_integer(
     'save_interval_secs', 600,
     'The frequency with which the model is saved, in seconds.')
 tf.app.flags.DEFINE_float(
-    'gpu_memory_fraction', 0.45, 'GPU memory fraction to use.')
+    'gpu_memory_fraction', 0.85, 'GPU memory fraction to use.')
 
 # =========================================================================== #
 # Optimization Flags.
